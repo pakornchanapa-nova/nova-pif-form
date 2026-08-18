@@ -902,7 +902,7 @@
   // ทุก submission (ใหม่และ revision) จะถูกส่งไปบันทึกเป็นแถวใน Google Sheet ด้วย
   // เพื่อให้ค้นหา/อ้างอิงประวัติของแต่ละโครงการย้อนหลังได้ง่าย ไม่ต้องขุดหาในอีเมล
   // ดูวิธีสร้าง Web App URL นี้ได้จาก Apps Script (Nova ทีมงานตั้งค่าครั้งเดียว)
-  const SHEET_WEBHOOK_URL = ""; // <-- ใส่ URL ที่ได้จาก Google Apps Script deployment ตรงนี้
+  const SHEET_WEBHOOK_URL = "https://script.google.com/macros/s/AKfycbw1V6sO2MkwXOQaIxSBSUNTAbBHpsPxLRRebCxKHxTqQ2FjQD_cQTHoOMhXkHi3YhMn/exec";
 
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
