@@ -159,6 +159,51 @@
     <h2>1) PROJECT INFORMATION / ข้อมูลโครงการ</h2>
 
     <div class="row required-field">
+      <label class="req">สถานะการส่งข้อมูล <span class="en">Submission Type</span></label>
+      <div class="radio-line">
+        <label><input type="radio" name="submission_type" value="New" required checked onchange="toggle('revision_box', false)"> ส่งข้อมูลใหม่ (New Project)</label>
+        <label><input type="radio" name="submission_type" value="Revision" required onchange="toggle('revision_box', true)"> อัปเดต/แก้ไขจากโครงการที่เคยส่งมาก่อน (Revision)</label>
+      </div>
+    </div>
+    <div class="toggle-body" id="revision_box">
+      <div class="row required-field">
+        <label class="req">รหัสอ้างอิง (Submission ID) ของครั้งก่อน <span class="en">Reference Submission ID</span></label>
+        <input type="text" name="ref_submission_id" placeholder="เช่น PIF-20260810-093015 (ดูได้จากอีเมล/หน้าจอยืนยันครั้งก่อน)">
+        <p class="hint">ถ้าไม่มีรหัสนี้ (เช่นลืม หรือส่งทางอื่นมาก่อน) กรอกชื่อโครงการเดิมด้านล่างแทนได้</p>
+      </div>
+      <div class="grid2">
+        <div class="row">
+          <label>ครั้งที่แก้ไข <span class="en">Revision No.</span></label>
+          <select name="revision_no">
+            <option value="1">ครั้งที่ 1 (Revision 1)</option>
+            <option value="2">ครั้งที่ 2 (Revision 2)</option>
+            <option value="3">ครั้งที่ 3 (Revision 3)</option>
+            <option value="4">ครั้งที่ 4 (Revision 4)</option>
+            <option value="5+">ครั้งที่ 5 ขึ้นไป (Revision 5+)</option>
+          </select>
+        </div>
+        <div class="row">
+          <label>อ้างอิงชื่อโครงการเดิม <span class="en">Reference Project Name</span></label>
+          <input type="text" name="ref_project_name" placeholder="ถ้าชื่อโครงการเดิมเหมือนกัน ใส่ชื่อเดิมซ้ำได้">
+        </div>
+      </div>
+      <div class="grid2">
+        <div class="row">
+          <label>วันที่ส่งครั้งก่อน (โดยประมาณ) <span class="en">Previous Submission Date</span></label>
+          <input type="date" name="ref_previous_date">
+        </div>
+        <div class="row">
+          <label>เลขที่ใบเสนอราคาเดิม (ถ้ามี) <span class="en">Previous Quotation No.</span></label>
+          <input type="text" name="ref_quotation_no">
+        </div>
+      </div>
+      <div class="row">
+        <label>สิ่งที่เปลี่ยนแปลงจากครั้งก่อน <span class="en">What Changed</span></label>
+        <textarea name="ref_changes" placeholder="เช่น เพิ่มพื้นที่, เปลี่ยนขนาดเครน, ปรับ Layout"></textarea>
+      </div>
+    </div>
+
+    <div class="row required-field">
       <label class="req">ชื่อโครงการ <span class="en">Project Name</span></label>
       <input type="text" name="project_name" required>
     </div>
@@ -170,12 +215,99 @@
 
     <div class="grid2">
       <div class="row required-field">
-        <label class="req">ที่ตั้งโครงการ (จังหวัด, ประเทศ) <span class="en">Location</span></label>
-        <input type="text" name="location" placeholder="เช่น ระยอง, Thailand" required>
+        <label class="req">จังหวัดที่ตั้งโครงการ <span class="en">Province</span></label>
+        <select name="province" required onchange="toggle('location_other_box', this.value==='อื่นๆ/ต่างประเทศ')">
+          <option value="">-- เลือกจังหวัด --</option>
+          <option value="กรุงเทพมหานคร">กรุงเทพมหานคร</option>
+          <option value="กระบี่">กระบี่</option>
+          <option value="กาญจนบุรี">กาญจนบุรี</option>
+          <option value="กาฬสินธุ์">กาฬสินธุ์</option>
+          <option value="กำแพงเพชร">กำแพงเพชร</option>
+          <option value="ขอนแก่น">ขอนแก่น</option>
+          <option value="จันทบุรี">จันทบุรี</option>
+          <option value="ฉะเชิงเทรา">ฉะเชิงเทรา</option>
+          <option value="ชลบุรี">ชลบุรี</option>
+          <option value="ชัยนาท">ชัยนาท</option>
+          <option value="ชัยภูมิ">ชัยภูมิ</option>
+          <option value="ชุมพร">ชุมพร</option>
+          <option value="เชียงราย">เชียงราย</option>
+          <option value="เชียงใหม่">เชียงใหม่</option>
+          <option value="ตรัง">ตรัง</option>
+          <option value="ตราด">ตราด</option>
+          <option value="ตาก">ตาก</option>
+          <option value="นครนายก">นครนายก</option>
+          <option value="นครปฐม">นครปฐม</option>
+          <option value="นครพนม">นครพนม</option>
+          <option value="นครราชสีมา">นครราชสีมา</option>
+          <option value="นครศรีธรรมราช">นครศรีธรรมราช</option>
+          <option value="นครสวรรค์">นครสวรรค์</option>
+          <option value="นนทบุรี">นนทบุรี</option>
+          <option value="นราธิวาส">นราธิวาส</option>
+          <option value="น่าน">น่าน</option>
+          <option value="บึงกาฬ">บึงกาฬ</option>
+          <option value="บุรีรัมย์">บุรีรัมย์</option>
+          <option value="ปทุมธานี">ปทุมธานี</option>
+          <option value="ประจวบคีรีขันธ์">ประจวบคีรีขันธ์</option>
+          <option value="ปราจีนบุรี">ปราจีนบุรี</option>
+          <option value="ปัตตานี">ปัตตานี</option>
+          <option value="พระนครศรีอยุธยา">พระนครศรีอยุธยา</option>
+          <option value="พะเยา">พะเยา</option>
+          <option value="พังงา">พังงา</option>
+          <option value="พัทลุง">พัทลุง</option>
+          <option value="พิจิตร">พิจิตร</option>
+          <option value="พิษณุโลก">พิษณุโลก</option>
+          <option value="เพชรบุรี">เพชรบุรี</option>
+          <option value="เพชรบูรณ์">เพชรบูรณ์</option>
+          <option value="แพร่">แพร่</option>
+          <option value="ภูเก็ต">ภูเก็ต</option>
+          <option value="มหาสารคาม">มหาสารคาม</option>
+          <option value="มุกดาหาร">มุกดาหาร</option>
+          <option value="แม่ฮ่องสอน">แม่ฮ่องสอน</option>
+          <option value="ยโสธร">ยโสธร</option>
+          <option value="ยะลา">ยะลา</option>
+          <option value="ร้อยเอ็ด">ร้อยเอ็ด</option>
+          <option value="ระนอง">ระนอง</option>
+          <option value="ระยอง">ระยอง</option>
+          <option value="ราชบุรี">ราชบุรี</option>
+          <option value="ลพบุรี">ลพบุรี</option>
+          <option value="ลำปาง">ลำปาง</option>
+          <option value="ลำพูน">ลำพูน</option>
+          <option value="เลย">เลย</option>
+          <option value="ศรีสะเกษ">ศรีสะเกษ</option>
+          <option value="สกลนคร">สกลนคร</option>
+          <option value="สงขลา">สงขลา</option>
+          <option value="สตูล">สตูล</option>
+          <option value="สมุทรปราการ">สมุทรปราการ</option>
+          <option value="สมุทรสงคราม">สมุทรสงคราม</option>
+          <option value="สมุทรสาคร">สมุทรสาคร</option>
+          <option value="สระแก้ว">สระแก้ว</option>
+          <option value="สระบุรี">สระบุรี</option>
+          <option value="สิงห์บุรี">สิงห์บุรี</option>
+          <option value="สุโขทัย">สุโขทัย</option>
+          <option value="สุพรรณบุรี">สุพรรณบุรี</option>
+          <option value="สุราษฎร์ธานี">สุราษฎร์ธานี</option>
+          <option value="สุรินทร์">สุรินทร์</option>
+          <option value="หนองคาย">หนองคาย</option>
+          <option value="หนองบัวลำภู">หนองบัวลำภู</option>
+          <option value="อ่างทอง">อ่างทอง</option>
+          <option value="อำนาจเจริญ">อำนาจเจริญ</option>
+          <option value="อุดรธานี">อุดรธานี</option>
+          <option value="อุตรดิตถ์">อุตรดิตถ์</option>
+          <option value="อุทัยธานี">อุทัยธานี</option>
+          <option value="อุบลราชธานี">อุบลราชธานี</option>
+          <option value="อื่นๆ/ต่างประเทศ">อื่นๆ / ต่างประเทศ (เช่น ลาว)</option>
+        </select>
+        <input type="hidden" name="location" id="location_field">
       </div>
       <div class="row optional-field">
         <label>Google Map Link <span class="en">(ถ้ามี)</span></label>
         <input type="text" name="map_link" placeholder="https://maps.google.com/...">
+      </div>
+    </div>
+    <div class="toggle-body" id="location_other_box">
+      <div class="row">
+        <label>ระบุที่ตั้ง <span class="en">Specify Location</span></label>
+        <input type="text" name="location_other" placeholder="เช่น หลวงพระบาง, Laos">
       </div>
     </div>
 
@@ -314,8 +446,10 @@
       <div class="row required-field">
         <label class="req">Exposure (มยผ.1311)</label>
         <select name="wind_tis_exposure" required>
-          <option value="A" selected>A</option><option value="B">B</option><option value="C">C</option>
+          <option value="A" selected>A - พื้นที่โล่ง / ชายฝั่งทะเล (Open Terrain / Coastal)</option>
+          <option value="B">B - ชานเมือง / ศูนย์กลางเมืองขนาดเล็ก (Suburban / Small Town Center)</option>
         </select>
+        <p class="hint">A: พื้นที่โล่งมีอาคาร/ต้นไม้กระจายอยู่ห่างๆ หรือบริเวณชายฝั่งทะเล | B: พื้นที่ชานเมือง มีต้นไม้ใหญ่หนาแน่น หรือศูนย์กลางเมืองขนาดเล็ก (มยผ.1311-50 กำหนดเพียง 2 ประเภทนี้)</p>
       </div>
     </div>
 
@@ -330,8 +464,11 @@
           <div class="row">
             <label>Exposure (ASCE)</label>
             <select name="wind_asce_exposure">
-              <option value="A">A</option><option value="B" selected>B</option><option value="C">C</option>
+              <option value="B" selected>B - เขตเมือง/ชานเมือง (Urban/Suburban, closely spaced obstructions)</option>
+              <option value="C">C - พื้นที่โล่งมีสิ่งกีดขวางกระจาย (Open Terrain, scattered obstructions)</option>
+              <option value="D">D - พื้นที่โล่งราบ/ผิวน้ำ (Flat Unobstructed Areas / Water Surfaces)</option>
             </select>
+            <p class="hint">B: เขตเมือง/ชานเมือง มีสิ่งกีดขวางถี่ | C: ที่โล่งมีสิ่งกีดขวางประปราย (ทุ่งหญ้า) | D: พื้นที่ราบโล่ง/ชายฝั่ง/ผิวน้ำ (ตาม ASCE 7 ปัจจุบันไม่มี Exposure A แล้ว)</p>
           </div>
         </div>
       </div>
@@ -440,14 +577,21 @@
         <div class="row">
           <label>วัสดุพื้นชั้นลอย <span class="en">Floor Material</span></label>
           <div class="radio-line">
-            <label><input type="radio" name="mezz_floor" value="Hollow Core + Topping 5cm"> Hollow Core + Topping 5cm</label>
-            <label><input type="radio" name="mezz_floor" value="Plank Slab + Topping 5cm"> Plank Slab + Topping 5cm</label>
-            <label><input type="radio" name="mezz_floor" value="Metal Deck"> Metal Deck</label>
-            <label><input type="radio" name="mezz_floor" value="Other" onchange="toggle('mezz_floor_other_box', true)"> อื่นๆ</label>
+            <label><input type="radio" name="mezz_floor" value="Hollow Core + Topping 5cm" onchange="handleMezzFloorChange(this.value)"> Hollow Core + Topping 5cm</label>
+            <label><input type="radio" name="mezz_floor" value="Plank Slab + Topping 5cm" onchange="handleMezzFloorChange(this.value)"> Plank Slab + Topping 5cm</label>
+            <label><input type="radio" name="mezz_floor" value="Metal Deck" onchange="handleMezzFloorChange(this.value)"> Metal Deck</label>
+            <label><input type="radio" name="mezz_floor" value="Other" onchange="handleMezzFloorChange(this.value)"> อื่นๆ</label>
           </div>
         </div>
         <div class="toggle-body" id="mezz_floor_other_box">
           <input type="text" name="mezz_floor_other" placeholder="ระบุวัสดุพื้นชั้นลอย">
+        </div>
+        <div class="toggle-body" id="metal_deck_supply_box">
+          <label>ให้ Nova Supply Metal Deck หรือไม่</label>
+          <div class="radio-line">
+            <label><input type="radio" name="metal_deck_supply" value="Yes"> Yes</label>
+            <label><input type="radio" name="metal_deck_supply" value="No" checked> No</label>
+          </div>
         </div>
       </div>
     </div>
@@ -654,6 +798,11 @@
       </div>
     </div>
 
+    <div class="row optional-field">
+      <label>ข้อมูลเพิ่มเติมอื่นๆ ใน Scope of Work <span class="en">Additional Scope Notes (ถ้าไม่มีรายการให้ติ๊กเลือกด้านบน)</span></label>
+      <textarea name="scope_other_notes" placeholder="ระบุรายการ/ขอบเขตงานอื่นๆ ที่ไม่มีในตัวเลือกด้านบน"></textarea>
+    </div>
+
     <details>
       <summary>ดูตาราง Scope of Work มาตรฐาน (Nova / Customer) — อ้างอิงเท่านั้น</summary>
       <table class="matrix">
@@ -715,6 +864,8 @@
   </div>
 
   <input type="hidden" name="to_email" id="to_email_field">
+  <input type="hidden" name="submission_id" id="submission_id_field">
+  <input type="hidden" name="form_version" id="form_version_field">
   <textarea name="message" id="message_field" style="display:none"></textarea>
 
   <div class="submit-bar">
@@ -724,7 +875,7 @@
 
   </form>
 
-  <small class="footnote">Nova Buildings (Thailand) Limited — Document No. NBV-PIF-____ Rev.00</small>
+  <small class="footnote" id="form_version_label">Nova Buildings (Thailand) Limited — Document No. NBV-PIF-____ Rev.01</small>
 </div>
 
 <script>
@@ -742,10 +893,30 @@
   // ใส่ได้หลายอีเมล คั่นด้วยคอมม่า เช่น "sales@novabuildings.com, aun@novabuildings.com"
   const NOTIFY_TO_EMAIL     = "pakorn.pc4.chanapa@novabuildingsasia.com, dachaya.dm2.manphan@novabuildingsasia.com, max.n13.suphakonwutthiphong@novabuildingsasia.com, tarakorn.tw6.wisetmook@novabuildingsasia.com, napat.np9.suksre@novabuildingsasia.com";
 
+  // ---- FORM VERSION ----
+  // เพิ่มเลข Rev ทุกครั้งที่แก้ไขเนื้อหาฟอร์ม (เช่น "Rev.02") ค่านี้จะแสดงที่ท้ายหน้าฟอร์ม
+  // และแนบไปกับทุกอีเมลที่ส่งเข้ามา ทำให้ตรวจสอบย้อนหลังได้ว่า inquiry แต่ละใบกรอกด้วยฟอร์มเวอร์ชันไหน
+  const FORM_VERSION = "Rev.01";
+
+  // ---- GOOGLE SHEET LOG (optional but recommended for tracking revisions) ----
+  // ทุก submission (ใหม่และ revision) จะถูกส่งไปบันทึกเป็นแถวใน Google Sheet ด้วย
+  // เพื่อให้ค้นหา/อ้างอิงประวัติของแต่ละโครงการย้อนหลังได้ง่าย ไม่ต้องขุดหาในอีเมล
+  // ดูวิธีสร้าง Web App URL นี้ได้จาก Apps Script (Nova ทีมงานตั้งค่าครั้งเดียว)
+  const SHEET_WEBHOOK_URL = ""; // <-- ใส่ URL ที่ได้จาก Google Apps Script deployment ตรงนี้
+
   emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
 
   document.getElementById('date_submitted').value = new Date().toISOString().split('T')[0];
   document.getElementById('to_email_field').value = NOTIFY_TO_EMAIL;
+  document.getElementById('form_version_label').textContent = 'Nova Buildings (Thailand) Limited — Document No. NBV-PIF-____ ' + FORM_VERSION;
+  document.getElementById('form_version_field').value = FORM_VERSION;
+
+  function generateSubmissionId(){
+    const d = new Date();
+    const pad = n => String(n).padStart(2,'0');
+    return 'PIF-' + d.getFullYear() + pad(d.getMonth()+1) + pad(d.getDate()) + '-' + pad(d.getHours()) + pad(d.getMinutes()) + pad(d.getSeconds());
+  }
+  document.getElementById('submission_id_field').value = generateSubmissionId();
 
   function toggle(id, show){
     const el = document.getElementById(id);
@@ -754,6 +925,10 @@
   function toggleBox(boxId, bodyId, show){
     document.getElementById(boxId).classList.toggle('on', show);
     document.getElementById(bodyId).classList.toggle('show', show);
+  }
+  function handleMezzFloorChange(val){
+    toggle('mezz_floor_other_box', val === 'Other');
+    toggle('metal_deck_supply_box', val === 'Metal Deck');
   }
   // Reveals the next hidden numbered slot (e.g. craneSlot2, craneSlot3...) up to maxCount.
   function revealNextSlot(prefix, maxCount, btnId){
@@ -773,6 +948,17 @@
     const slotVisible = (id) => document.getElementById(id) && document.getElementById(id).style.display !== 'none';
 
     let lines = [];
+    lines.push(`Submission ID: ${v('submission_id')}`);
+    lines.push(`Form Version: ${FORM_VERSION}`);
+    lines.push(`Submission Type: ${v('submission_type')}`);
+    if (fd.get('submission_type') === 'Revision'){
+      lines.push(`  -> Revision No.: ${v('revision_no')}`);
+      lines.push(`  -> Reference Submission ID: ${v('ref_submission_id')}`);
+      lines.push(`  -> Reference Project: ${v('ref_project_name')}`);
+      lines.push(`  -> Previous Submission Date: ${v('ref_previous_date')}`);
+      lines.push(`  -> Previous Quotation No.: ${v('ref_quotation_no')}`);
+      lines.push(`  -> What Changed: ${v('ref_changes')}`);
+    }
     lines.push('=== 1) PROJECT INFORMATION ===');
     lines.push(`Project Name: ${v('project_name')}`);
     lines.push(`Customer: ${v('customer_name')}`);
@@ -813,6 +999,7 @@
     if (isOn('mezz_body')){
       const floor = fd.get('mezz_floor') === 'Other' ? ('Other - ' + v('mezz_floor_other')) : v('mezz_floor');
       lines.push(`Mezzanine Live Load: ${v('mezz_live_load')} kg/m2, Floor Material: ${floor}`);
+      if (fd.get('mezz_floor') === 'Metal Deck') lines.push(`  -> Nova Supply Metal Deck: ${v('metal_deck_supply')}`);
     }
     if (isOn('anchor_body')) lines.push(`Anchor Bolt Finish: ${v('anchor_finish')}`);
     if (isOn('gutter_body')) lines.push(`Gutter Support - Fascia Frame: ${v('gutter_fascia_yn')}, Soffit Frame: ${v('gutter_soffit_yn')}`);
@@ -833,6 +1020,7 @@
     lines.push(`Primer: ${v('primer_yn')}${fd.get('primer_yn')==='Yes' ? ` - ${v('primer_type')}, ${v('primer_thickness')} microns` : ''}`);
     lines.push(`Fireproof: ${v('fireproof_yn')}${fd.get('fireproof_yn')==='Yes' ? ` - ${v('fireproof_thickness')} microns, Rating: ${v('fireproof_rating')}` : ''}`);
     lines.push(`Topcoat: ${v('topcoat_yn')}${fd.get('topcoat_yn')==='Yes' ? ` - ${v('topcoat_type')}, ${v('topcoat_thickness')} microns` : ''}`);
+    lines.push(`Additional Scope Notes: ${v('scope_other_notes')}`);
 
     lines.push('\n=== 4) ATTACHMENTS / NOTES ===');
     lines.push(`Additional Notes: ${v('additional_notes')}`);
@@ -845,25 +1033,61 @@
     return lines.join('\n');
   }
 
+  // ส่งสำเนาข้อมูล submission ไปบันทึกใน Google Sheet (ถ้าตั้งค่า SHEET_WEBHOOK_URL ไว้แล้ว)
+  // ใช้ mode:'no-cors' เพราะ Apps Script Web App ไม่ส่ง CORS header กลับมา — เป็นวิธีมาตรฐาน
+  // จึงอ่าน response ไม่ได้ แต่ฝั่ง Google Sheet จะได้รับและบันทึกแถวใหม่ตามปกติ
+  function logToSheet(fd){
+    if (!SHEET_WEBHOOK_URL) return;
+    try{
+      const payload = {};
+      for (const [k, val] of fd.entries()){
+        if (val instanceof File) continue;
+        if (payload[k] === undefined) payload[k] = val;
+      }
+      fetch(SHEET_WEBHOOK_URL, {
+        method: 'POST',
+        mode: 'no-cors',
+        headers: {'Content-Type': 'text/plain'},
+        body: JSON.stringify(payload)
+      });
+    }catch(err){ /* การบันทึกลง Sheet ล้มเหลวไม่ควรทำให้การส่งอีเมลหลักล้มเหลวตาม */ }
+  }
+
   document.getElementById('pifForm').addEventListener('submit', function(e){
     e.preventDefault();
     const form = this;
     const btn = document.getElementById('submitBtn');
     const status = document.getElementById('status');
+
+    const provinceVal = form.querySelector('[name="province"]').value;
+    const locationOtherVal = form.querySelector('[name="location_other"]').value;
+    document.getElementById('location_field').value = (provinceVal === 'อื่นๆ/ต่างประเทศ') ? locationOtherVal : provinceVal;
+
     const fd = new FormData(form);
 
     document.getElementById('message_field').value = buildMessage(fd);
+    logToSheet(fd);
 
     btn.disabled = true;
     status.className = '';
     status.textContent = 'กำลังส่งข้อมูล...';
 
+    const sentSubmissionId = fd.get('submission_id');
+
     emailjs.sendForm(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, form).then(function(){
       status.className = 'ok';
-      status.textContent = 'ส่งข้อมูลสำเร็จ ขอบคุณค่ะ/ครับ ทีมงาน Nova Buildings จะติดต่อกลับโดยเร็ว';
+      status.innerHTML = 'ส่งข้อมูลสำเร็จ ขอบคุณค่ะ/ครับ ทีมงาน Nova Buildings จะติดต่อกลับโดยเร็ว<br>' +
+        '<strong>กรุณาบันทึกรหัสอ้างอิงนี้ไว้ (ใช้เวลามีการแก้ไข/อัปเดตโครงการในอนาคต):</strong><br>' +
+        '<span style="font-size:16px;font-weight:700;color:#0b2545;">' + sentSubmissionId + '</span>';
       form.reset();
       document.getElementById('date_submitted').value = new Date().toISOString().split('T')[0];
       document.getElementById('to_email_field').value = NOTIFY_TO_EMAIL;
+      document.getElementById('form_version_field').value = FORM_VERSION;
+      document.getElementById('submission_id_field').value = generateSubmissionId();
+      toggle('revision_box', false);
+      toggle('location_other_box', false);
+      toggle('mezz_floor_other_box', false);
+      toggle('metal_deck_supply_box', false);
     }).catch(function(err){
       status.className = 'err';
       status.textContent = 'ส่งข้อมูลไม่สำเร็จ กรุณาลองใหม่อีกครั้ง หรือติดต่อ Nova Buildings โดยตรง (' + (err && err.text ? err.text : 'error') + ')';
