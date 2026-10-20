@@ -325,6 +325,14 @@
       </div>
     </div>
 
+    <div class="row required-field">
+      <label class="req">ต้องการ Proposal Drawing หรือไม่ <span class="en">Request Proposal Drawing?</span></label>
+      <div class="radio-line">
+        <label><input type="radio" name="proposal_drawing" value="Yes"> Yes</label>
+        <label><input type="radio" name="proposal_drawing" value="No" checked> No</label>
+      </div>
+    </div>
+
     <div class="grid2">
       <div class="row required-field">
         <label class="req">วันที่ต้องการใบเสนอราคา <span class="en">Quotation Needed By</span></label>
@@ -864,6 +872,7 @@
   </div>
 
   <input type="hidden" name="to_email" id="to_email_field">
+  <input type="hidden" name="cc_email" id="cc_email_field">
   <input type="hidden" name="submission_id" id="submission_id_field">
   <input type="hidden" name="form_version" id="form_version_field">
   <textarea name="message" id="message_field" style="display:none"></textarea>
@@ -892,6 +901,8 @@
   const EMAILJS_TEMPLATE_ID = "template_rwnvr58";
   // ใส่ได้หลายอีเมล คั่นด้วยคอมม่า เช่น "sales@novabuildings.com, aun@novabuildings.com"
   const NOTIFY_TO_EMAIL     = "pakorn.pc4.chanapa@novabuildingsasia.com, dachaya.dm2.manphan@novabuildingsasia.com, max.n13.suphakonwutthiphong@novabuildingsasia.com, tarakorn.tw6.wisetmook@novabuildingsasia.com, napat.np9.suksre@novabuildingsasia.com";
+  // CC (ต้องตั้ง Cc ในเทมเพลต EmailJS เป็น {{cc_email}} ด้วย)
+  const NOTIFY_CC_EMAIL     = "Piyanat.pb8.Boonsaynant@novabuildingsasia.com";
 
   // ---- FORM VERSION ----
   // เพิ่มเลข Rev ทุกครั้งที่แก้ไขเนื้อหาฟอร์ม (เช่น "Rev.02") ค่านี้จะแสดงที่ท้ายหน้าฟอร์ม
@@ -908,6 +919,7 @@
 
   document.getElementById('date_submitted').value = new Date().toISOString().split('T')[0];
   document.getElementById('to_email_field').value = NOTIFY_TO_EMAIL;
+  document.getElementById('cc_email_field').value = NOTIFY_CC_EMAIL;
   document.getElementById('form_version_label').textContent = 'Nova Buildings (Thailand) Limited — Document No. NBV-PIF-____ ' + FORM_VERSION;
   document.getElementById('form_version_field').value = FORM_VERSION;
 
@@ -965,6 +977,7 @@
     lines.push(`Location: ${v('location')}`);
     lines.push(`Google Map: ${v('map_link')}`);
     lines.push(`Consultant Involved: ${v('consultant_yn')}${fd.get('consultant_name') ? ' - ' + fd.get('consultant_name') : ''}`);
+    lines.push(`Request Proposal Drawing: ${v('proposal_drawing')}`);
     lines.push(`Quotation Needed By: ${v('date_needed')}`);
     lines.push(`Date Submitted: ${v('date_submitted')}`);
 
@@ -1082,6 +1095,7 @@
       form.reset();
       document.getElementById('date_submitted').value = new Date().toISOString().split('T')[0];
       document.getElementById('to_email_field').value = NOTIFY_TO_EMAIL;
+      document.getElementById('cc_email_field').value = NOTIFY_CC_EMAIL;
       document.getElementById('form_version_field').value = FORM_VERSION;
       document.getElementById('submission_id_field').value = generateSubmissionId();
       toggle('revision_box', false);
